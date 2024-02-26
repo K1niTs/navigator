@@ -28,6 +28,7 @@ public class Main {
         navigator.chooseRoute("Route12");
         navigator.chooseRoute("Route12");
 
+
         System.out.println("\nSearch Routes from CityA to CityC:");
         printRoutes(navigator.searchRoutes("CityA", "CityC"));
 
@@ -61,8 +62,10 @@ public class Main {
         List<String> locationPoints5 = Arrays.asList("CityK", "CityL", "CityC");
         Route route5 = new Route("Route12", 50.0, 0, true, locationPoints5);
 
-        List<String> locationPoints6 = Arrays.asList("CityK", "CityL", "CityC");
-        Route route6 = new Route("Route12", 50.0, 0, true, locationPoints6);
+        List<String> locationPoints6 = Arrays.asList("CityA", "CityB", "CityC");
+        Route route6 = new Route("Route2", 30.0, 0, false, locationPoints6);
+        List<String> locationPoints7 = Arrays.asList("CityA", "CityB", "CityC");
+        Route route7 = new Route("Route1111111", 3333.0, 0, false, locationPoints7);
 
         navigator.addRoute(route1);
         navigator.addRoute(route2);
@@ -70,6 +73,7 @@ public class Main {
         navigator.addRoute(route4);
         navigator.addRoute(route5);
         navigator.addRoute(route6);
+        navigator.addRoute(route7);
 
     }
 
