@@ -31,11 +31,12 @@ public class Route {
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
-
     public boolean isFavorite() {
         return isFavorite;
     }
-
+    public Boolean getFavourite() {
+        return isFavorite;
+    }
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
@@ -68,15 +69,19 @@ public class Route {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return Double.compare(route.getDistance(), getDistance()) == 0 &&
+                Objects.equals(getLocationPoints().get(0), route.getLocationPoints().get(0)) &&
+                Objects.equals(getLocationPoints().get(getLocationPoints().size() - 1), route.getLocationPoints().get(route.getLocationPoints().size() - 1));
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Route route = (Route) obj;
-        return Objects.equals(id, route.id);
+    public int hashCode() {
+        return Objects.hash(getLocationPoints().get(0), getLocationPoints().get(getLocationPoints().size() - 1), getDistance());
     }
+
+
 }

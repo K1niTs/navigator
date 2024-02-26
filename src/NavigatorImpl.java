@@ -14,9 +14,19 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public void addRoute(Route route) {
-        routes.put(route.getId(), route);
-        if (route.isFavorite()) {
-            favoriteRoutes.add(route);
+        boolean isDuplicate = false;
+
+        for (CustomMap.Entry<String, Route> entry : routes.getTable()) {
+            if (entry != null && entry.getValue().equals(route)) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (!isDuplicate) {
+            routes.put(route.getId(), route);
+            if (route.isFavorite()) {
+                favoriteRoutes.add(route);
+            }
         }
     }
 
@@ -60,17 +70,18 @@ public class NavigatorImpl implements Navigator {
             if (entry != null) {
                 Route route = entry.getValue();
                 List<String> locationPoints = route.getLocationPoints();
-                int startIdx = locationPoints.indexOf(startPoint);
-                int endIdx = locationPoints.indexOf(endPoint);
+                int startId = locationPoints.indexOf(startPoint);
+                int endId = locationPoints.indexOf(endPoint);
 
-                if (startIdx != -1 && endIdx != -1 && startIdx <= endIdx) {
+                if (startId != -1 && endId != -1 && startId <= endId) {
                     resultRoutes.add(route);
                 }
             }
         }
-
-        resultRoutes.sort(Comparator.comparingDouble(Route::getDistance)
+        resultRoutes.sort(Comparator.<Route, Boolean>comparing(Route::getFavourite)
+                .thenComparingDouble(Route::getDistance)
                 .thenComparingInt(Route::getPopularity).reversed());
+
 
         return resultRoutes;
     }
@@ -78,7 +89,6 @@ public class NavigatorImpl implements Navigator {
     @Override
     public Iterable<Route> getFavoriteRoutes(String destinationPoint) {
         List<Route> resultRoutes = new ArrayList<>();
-
         for (Route route : favoriteRoutes) {
             List<String> locationPoints = route.getLocationPoints();
             if (!locationPoints.isEmpty() && !locationPoints.get(0).equals(destinationPoint)) {
@@ -86,7 +96,7 @@ public class NavigatorImpl implements Navigator {
             }
         }
 
-        resultRoutes.sort(Comparator.comparingDouble(Route::getDistance)
+        resultRoutes.sort(Comparator.comparingDouble(Route::getDistance).reversed()
                 .thenComparingInt(Route::getPopularity).reversed());
 
         return resultRoutes;

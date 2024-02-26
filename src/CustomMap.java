@@ -17,7 +17,6 @@ public class CustomMap<K, V> {
     public void put(K key, V value) {
         int index = getIndex(key);
         Entry<K, V> entry = table[index];
-
         while (entry != null) {
             if (entry.getKey().equals(key)) {
                 entry.setValue(value);
@@ -96,7 +95,7 @@ public class CustomMap<K, V> {
         }
     }
 
-    // Делаем внутренний класс Entry публичным
+
     public static class Entry<K, V> {
         private final K key;
         private V value;

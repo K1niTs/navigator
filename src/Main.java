@@ -14,7 +14,7 @@ public class Main {
         if (routeById != null) {
             System.out.println("\nRoute with id " + routeIdToGet + ": " + routeById);
         } else {
-            System.out.println("\nRoute with id " + routeIdToGet + " not found.");
+            System.out.println("\nRoute with id " + routeIdToGet + "null");
         }
 
         Route routeToCheck = new Route("Route2", 0.0, 0, false, Arrays.asList("CityA", "CityB", "CityC"));
@@ -24,9 +24,13 @@ public class Main {
         navigator.chooseRoute("Route2");
         navigator.chooseRoute("Route8");
         navigator.chooseRoute("Route8");
-        navigator.chooseRoute("Route8");
         navigator.chooseRoute("Route12");
         navigator.chooseRoute("Route12");
+        navigator.chooseRoute("Route15");
+        navigator.chooseRoute("Route15");
+        navigator.chooseRoute("Route15");
+        navigator.chooseRoute("Route15");
+
 
 
         System.out.println("\nSearch Routes from CityA to CityC:");
@@ -47,7 +51,7 @@ public class Main {
     }
 
     private static void addRoutes(Navigator navigator) {
-        List<String> locationPoints1 = Arrays.asList("CityA", "CityB", "CityC");
+        List<String> locationPoints1 = Arrays.asList("CityA", "CityB","CityK", "CityC");
         Route route1 = new Route("Route2", 30.0, 0, false, locationPoints1);
 
         List<String> locationPoints2 = Arrays.asList("CityA", "CityD", "CityC");
@@ -56,16 +60,21 @@ public class Main {
         List<String> locationPoints3 = Arrays.asList("CityE", "CityF", "CityG", "CityC");
         Route route3 = new Route("Route8", 40.0, 0, false, locationPoints3);
 
-        List<String> locationPoints4 = Arrays.asList("CityA", "CityH", "CityI", "CityJ", "CityC");
-        Route route4 = new Route("Route10", 70.0, 0, true, locationPoints4);
+        List<String> locationPoints4 = Arrays.asList("CityA", "CityB", "CityC");
+        Route route4 = new Route("Route10", 40.0, 0, true, locationPoints4);
 
         List<String> locationPoints5 = Arrays.asList("CityK", "CityL", "CityC");
-        Route route5 = new Route("Route12", 50.0, 0, true, locationPoints5);
+        Route route5 = new Route("Route12", 40.0, 0, true, locationPoints5);
 
         List<String> locationPoints6 = Arrays.asList("CityA", "CityB", "CityC");
         Route route6 = new Route("Route2", 30.0, 0, false, locationPoints6);
+
         List<String> locationPoints7 = Arrays.asList("CityA", "CityB", "CityC");
-        Route route7 = new Route("Route1111111", 3333.0, 0, false, locationPoints7);
+        Route route7 = new Route("Route7", 30.0, 0, false, locationPoints7);
+
+        List<String> locationPoints8 = Arrays.asList("CityI", "CityG", "CityF");
+        Route route8 = new Route("Route15", 30.0, 0, false, locationPoints8);
+
 
         navigator.addRoute(route1);
         navigator.addRoute(route2);
@@ -74,6 +83,7 @@ public class Main {
         navigator.addRoute(route5);
         navigator.addRoute(route6);
         navigator.addRoute(route7);
+        navigator.addRoute(route8);
 
     }
 
